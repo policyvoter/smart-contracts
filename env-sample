@@ -1,0 +1,4 @@
+ARBITRUM_TEST="https://rinkeby.arbitrum.io/rpc"
+PRIVATE_KEY="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+COINMARKETCAP_API="yyyyyyyyyyyyyyyyyyyyyyyyyyy"
+ARBISCAN_KEY="zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
