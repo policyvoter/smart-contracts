@@ -9,7 +9,7 @@
 		"test": "npx hardhat test --network ganache",
 		"testGas": "REPORT_GAS=true npx hardhat test --network ganache",
 		"prettier": "prettier --write 'contracts/**/*.sol'",
-		"deploy:arbitrum_test": "NETWORK=arbitrum_test npx hardhat run --network arbitrum_test scripts/deploy.js"
+		"deploy:pv": "NETWORK=policy_voter npx hardhat run --network policy_voter scripts/deploy.js"
 	},
 	"author": "https://policyvoter.com",
 	"license": "Mozilla Public License Version 2.0",
