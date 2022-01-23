@@ -36,8 +36,8 @@ module.exports = {
 			url: process.env.POLICY_VOTER_RPC,
 			network_id: 4444,
 			gas: 2500000,
-			gasPrice: 30000000, //0.03 gwei
-			timeout: 25000,
+			gasPrice: 10000000000, //1 gwei
+			timeout: 35000,
 			accounts: [process.env.PRIVATE_KEY],
 		},
 	},

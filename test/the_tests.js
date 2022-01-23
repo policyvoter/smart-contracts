@@ -27,6 +27,8 @@ describe("PolicyVoter Tests", function () {
 			owner.address
 		)
 		expect(hasRole === true)
+		let version = await pv.version()
+		expect(String(version).length > 2)
 	})
 
 	it("simple create policies", async function () {

@@ -15,6 +15,8 @@ contract PolicyVoterV0 is ReentrancyGuard, AccessControl {
 	bytes32 public constant BLACKLISTER_ROLE = keccak256("BLACKLISTER_ROLE");
 	bytes32 public constant POLICY_BLACKLISTER_ROLE = keccak256("POLICY_BLACKLISTER_ROLE");
 
+	string public version = "0.0.1";
+
 	struct Policy {
 		address creator;
 		string bodyHash;
