@@ -6,7 +6,7 @@ const ether = require("@openzeppelin/test-helpers/src/ether")
 let pv
 let owner, acc1, acc2, acc3
 
-describe("PolicyVoter Tests", function () {
+describe("PolicyVoter Negative Tests", function () {
 	beforeEach(async function () {
 		let TContract = await ethers.getContractFactory("PolicyVoterV0")
 
@@ -29,7 +29,21 @@ describe("PolicyVoter Tests", function () {
 		expect(hasRole === true)
 	})
 
-	it("simple create policies", async function () {
+	it("can't policies if you're not POLICY_CREATOR_ROLE", async function () {
+		await expect(
+			pv
+				.connect(acc1)
+				.createNewPolicy(
+					acc1.address,
+					"a1b2c3",
+					"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
+				)
+		).to.to.be.revertedWith(
+			"account 0x17d4f1c23e45312b4ad8251b293b1afc3d3271a4 is missing role 0x90fe2ba5da14f172ed5a0a0fec391dbf8f191c9a2f3557d79ede5d6b1c1c9ffb"
+		)
+	})
+
+	it("can't create the same policy two times", async function () {
 		await expect(
 			pv.createNewPolicy(
 				acc1.address,
@@ -37,9 +51,17 @@ describe("PolicyVoter Tests", function () {
 				"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
 			)
 		).to.emit(pv, "NewPolicy")
+
+		await expect(
+			pv.createNewPolicy(
+				acc1.address,
+				"a1b2c3",
+				"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
+			)
+		).to.to.be.revertedWith("policyID already exists")
 	})
 
-	it("can create policy if account is removed from blacklist", async function () {
+	it("can't create the a policy by a blacklisted creator", async function () {
 		await pv.setBlacklist(acc1.address, true)
 		await expect(
 			pv.createNewPolicy(
@@ -48,14 +70,6 @@ describe("PolicyVoter Tests", function () {
 				"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
 			)
 		).to.be.revertedWith("account is blacklisted")
-		await pv.setBlacklist(acc1.address, false)
-		await expect(
-			pv.createNewPolicy(
-				acc1.address,
-				"a1b2c3",
-				"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
-			)
-		).to.emit(pv, "NewPolicy")
 	})
 
 	// function vote(string memory policyID) external nonReentrant {
@@ -71,7 +85,7 @@ describe("PolicyVoter Tests", function () {
 
 	// 	emit Voted(policyID);
 	// }
-	it("simple vote", async function () {
+	it("can't vote too fast", async function () {
 		await expect(
 			pv.createNewPolicy(
 				acc1.address,
@@ -80,10 +94,11 @@ describe("PolicyVoter Tests", function () {
 			)
 		).to.emit(pv, "NewPolicy")
 
-		await expect(pv.vote("a1b2c3")).to.emit(pv, "Voted")
+		await expect(pv.connect(acc1).vote("a1b2c3")).to.emit(pv, "Voted")
+		await expect(pv.connect(acc1).vote("a1b2c3")).to.be.revertedWith("30 seconds between votes")
 	})
 
-	it("votes increase ok", async function () {
+	it("can't vote two times", async function () {
 		await expect(
 			pv.createNewPolicy(
 				acc1.address,
@@ -92,11 +107,22 @@ describe("PolicyVoter Tests", function () {
 			)
 		).to.emit(pv, "NewPolicy")
 
-		await expect(pv.vote("a1b2c3")).to.emit(pv, "Voted")
 		await expect(pv.connect(acc1).vote("a1b2c3")).to.emit(pv, "Voted")
-		await expect(pv.connect(acc2).vote("a1b2c3")).to.emit(pv, "Voted")
+		await waitForSeconds(31)
+		await expect(pv.connect(acc1).vote("a1b2c3")).to.be.revertedWith("already voted")
+	})
 
-		expect(Number(await pv.votes("a1b2c3"))).to.equal(3)
+	it("can't vote if blacklisted", async function () {
+		await expect(
+			pv.createNewPolicy(
+				acc1.address,
+				"a1b2c3",
+				"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
+			)
+		).to.emit(pv, "NewPolicy")
+
+		await pv.setBlacklist(acc2.address, true)
+		await expect(pv.connect(acc2).vote("a1b2c3")).to.be.revertedWith("account is blacklisted")
 	})
 
 	// 	/**
@@ -112,7 +138,7 @@ describe("PolicyVoter Tests", function () {
 	// 	emit UnVoted(policyID);
 	// }
 
-	it("votes decrease ok", async function () {
+	it("can't unvote a not voted project", async function () {
 		await expect(
 			pv.createNewPolicy(
 				acc1.address,
@@ -120,16 +146,10 @@ describe("PolicyVoter Tests", function () {
 				"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
 			)
 		).to.emit(pv, "NewPolicy")
-
-		await expect(pv.vote("a1b2c3")).to.emit(pv, "Voted")
-		await expect(pv.connect(acc1).vote("a1b2c3")).to.emit(pv, "Voted")
-		await expect(pv.connect(acc2).vote("a1b2c3")).to.emit(pv, "Voted")
-		await expect(pv.connect(acc1).unVote("a1b2c3")).to.emit(pv, "UnVoted")
-
-		expect(Number(await pv.votes("a1b2c3"))).to.equal(2)
+		await expect(pv.connect(acc2).unVote("a1b2c3")).to.be.revertedWith("not voted")
 	})
 
-	it("can vote or unvote a removed from blacklisted policy", async function () {
+	it("can't *UNVOTE* multiple times", async function () {
 		await expect(
 			pv.createNewPolicy(
 				acc1.address,
@@ -137,17 +157,39 @@ describe("PolicyVoter Tests", function () {
 				"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
 			)
 		).to.emit(pv, "NewPolicy")
-		await expect(pv.vote("a1b2c3")).to.emit(pv, "Voted")
 
+		await expect(pv.connect(acc1).vote("a1b2c3")).to.emit(pv, "Voted")
+		await expect(pv.connect(acc1).unVote("a1b2c3")).to.emit(pv, "UnVoted")
+
+		await expect(pv.connect(acc2).unVote("a1b2c3")).to.be.revertedWith("not voted")
+	})
+
+	it("can't unvote from a blacklisted account", async function () {
+		await expect(
+			pv.createNewPolicy(
+				acc1.address,
+				"a1b2c3",
+				"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
+			)
+		).to.emit(pv, "NewPolicy")
+		await expect(pv.connect(acc2).vote("a1b2c3")).to.emit(pv, "Voted")
+		await pv.setBlacklist(acc2.address, true)
+		await expect(pv.connect(acc2).unVote("a1b2c3")).to.be.revertedWith("account is blacklisted")
+	})
+
+	it("can't vote or unvote a blacklisted policy", async function () {
+		await expect(
+			pv.createNewPolicy(
+				acc1.address,
+				"a1b2c3",
+				"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
+			)
+		).to.emit(pv, "NewPolicy")
 		await expect(pv.connect(acc2).vote("a1b2c3")).to.emit(pv, "Voted")
 		await pv.setPolicyBlacklist("a1b2c3", true, "illegal policy")
 
 		await expect(pv.connect(acc1).vote("a1b2c3")).to.be.revertedWith("policy is blacklisted")
 		await expect(pv.connect(acc2).unVote("a1b2c3")).to.be.revertedWith("policy is blacklisted")
-		await waitForSeconds(31)
-		await pv.setPolicyBlacklist("a1b2c3", false, "policy removed from blacklist")
-		await expect(pv.connect(acc2).unVote("a1b2c3")).to.emit(pv, "UnVoted")
-		await expect(pv.connect(acc1).vote("a1b2c3")).to.emit(pv, "Voted")
 	})
 
 	async function waitForSeconds(seconds) {

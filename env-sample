@@ -1,4 +1,2 @@
-ARBITRUM_TEST="https://rinkeby.arbitrum.io/rpc"
+POLICY_VOTER_RPC="https://rpc.policyvoter.tech"
 PRIVATE_KEY="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-COINMARKETCAP_API="yyyyyyyyyyyyyyyyyyyyyyyyyyy"
-ARBISCAN_KEY="zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"

@@ -3,6 +3,7 @@ require("dotenv").config()
 require("hardhat-gas-reporter")
 require("@nomiclabs/hardhat-web3")
 require("@nomiclabs/hardhat-etherscan")
+require("hardhat-abi-exporter")
 
 module.exports = {
 	solidity: {
@@ -31,9 +32,9 @@ module.exports = {
 			url: "http://localhost:7545",
 			blockGasLimit: 10000000,
 		},
-		arbitrum_test: {
-			url: process.env.ARBITRUM_TEST,
-			network_id: 421611,
+		policy_voter: {
+			url: process.env.POLICY_VOTER_RPC,
+			network_id: 4444,
 			gas: 2500000,
 			gasPrice: 30000000, //0.03 gwei
 			timeout: 25000,
@@ -42,15 +43,17 @@ module.exports = {
 	},
 	gasReporter: {
 		enabled: !!process.env.REPORT_GAS === true,
-		currency: "USD",
-		gasPrice: 100,
 		showTimeSpent: true,
-		coinmarketcap: process.env.COINMARKETCAP_API,
 	},
 	mocha: {
 		timeout: 25000,
 	},
-	etherscan: {
-		apiKey: process.env.ARBISCAN_KEY,
+	abiExporter: {
+		path: "./abi",
+		runOnCompile: true,
+		clear: true,
+		flat: true,
+		spacing: 2,
+		pretty: false,
 	},
 }
