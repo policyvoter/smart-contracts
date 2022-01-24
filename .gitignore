@@ -6,3 +6,4 @@ artifacts
 .env
 mnemonic.txt
 .openzeppelin
+scripts/a_script.js

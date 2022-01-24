@@ -39,7 +39,7 @@ describe("PolicyVoter Negative Tests", function () {
 					"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
 				)
 		).to.to.be.revertedWith(
-			"account 0x17d4f1c23e45312b4ad8251b293b1afc3d3271a4 is missing role 0x90fe2ba5da14f172ed5a0a0fec391dbf8f191c9a2f3557d79ede5d6b1c1c9ffb"
+			"account 0x4dd845ffafa516440de9e3f1360d846166bc398c is missing role 0x90fe2ba5da14f172ed5a0a0fec391dbf8f191c9a2f3557d79ede5d6b1c1c9ffb"
 		)
 	})
 
@@ -190,6 +190,10 @@ describe("PolicyVoter Negative Tests", function () {
 
 		await expect(pv.connect(acc1).vote("a1b2c3")).to.be.revertedWith("policy is blacklisted")
 		await expect(pv.connect(acc2).unVote("a1b2c3")).to.be.revertedWith("policy is blacklisted")
+	})
+
+	it("can't vote a non existend policy", async function () {
+		await expect(pv.connect(acc2).vote("xxxx")).to.be.revertedWith("policy not found")
 	})
 
 	async function waitForSeconds(seconds) {

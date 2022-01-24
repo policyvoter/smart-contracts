@@ -76,6 +76,7 @@ contract PolicyVoterV0 is ReentrancyGuard, AccessControl {
 		require(!isBlacklisted[msg.sender], "account is blacklisted");
 		require(!isPolicyBlacklisted[policyID], "policy is blacklisted");
 		require(bytes(votedOnProposal[msg.sender]).length == 0, "already voted");
+		require(policies[policyID].creator != address(0), "policy not found");
 
 		votedOnProposal[msg.sender] = policyID;
 
