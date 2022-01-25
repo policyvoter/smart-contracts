@@ -36,7 +36,7 @@ contract PolicyVoterV0 is ReentrancyGuard, AccessControl {
 	event NewPolicy(string indexed policyID);
 	event Voted(string indexed policyID, uint256 totalVotes);
 	event UnVoted(string indexed policyID, uint256 totalVotes);
-	event Blacklisted(address indexed policyID, bool blacklisted);
+	event Blacklisted(address indexed user, bool blacklisted);
 	event PolicyBlacklisted(string indexed policyID, bool blacklisted, string reason);
 
 	constructor() {
