@@ -33,11 +33,11 @@ contract PolicyVoterV0 is ReentrancyGuard, AccessControl {
 	mapping(string => bool) public isPolicyBlacklisted; //can't vote on it
 	mapping(string => string) public policyBlacklistedReason; //reason why it was blacklisted
 
-	event NewPolicy(string indexed policyID);
-	event Voted(string indexed policyID, uint256 totalVotes);
-	event UnVoted(string indexed policyID, uint256 totalVotes);
-	event Blacklisted(address indexed user, bool blacklisted);
-	event PolicyBlacklisted(string indexed policyID, bool blacklisted, string reason);
+	event NewPolicy(string policyID);
+	event Voted(string policyID, uint256 totalVotes);
+	event UnVoted(string policyID, uint256 totalVotes);
+	event Blacklisted(address user, bool blacklisted);
+	event PolicyBlacklisted(string policyID, bool blacklisted, string reason);
 
 	constructor() {
 		_setupRole(DEFAULT_ADMIN_ROLE, msg.sender);

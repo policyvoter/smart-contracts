@@ -27,7 +27,7 @@ var (
 )
 
 // Pv0SmartcontractABI is the input ABI used to generate the binding from.
-const Pv0SmartcontractABI = "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"policyID\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"blacklisted\",\"type\":\"bool\"}],\"name\":\"Blacklisted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"string\",\"name\":\"policyID\",\"type\":\"string\"}],\"name\":\"NewPolicy\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"string\",\"name\":\"policyID\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"blacklisted\",\"type\":\"bool\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"reason\",\"type\":\"string\"}],\"name\":\"PolicyBlacklisted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"previousAdminRole\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"newAdminRole\",\"type\":\"bytes32\"}],\"name\":\"RoleAdminChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"RoleGranted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"RoleRevoked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"string\",\"name\":\"policyID\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"totalVotes\",\"type\":\"uint256\"}],\"name\":\"UnVoted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"string\",\"name\":\"policyID\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"totalVotes\",\"type\":\"uint256\"}],\"name\":\"Voted\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"BLACKLISTER_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"DEFAULT_ADMIN_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"POLICY_BLACKLISTER_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"POLICY_CREATOR_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"policyID\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"bodyHash\",\"type\":\"string\"}],\"name\":\"createNewPolicy\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"}],\"name\":\"getRoleAdmin\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"grantRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"hasRole\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"isBlacklisted\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"name\":\"isPolicyBlacklisted\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"lastVoted\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"name\":\"policies\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"bodyHash\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"createdAt\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"name\":\"policyBlacklistedReason\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"renounceRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"revokeRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"blacklisted\",\"type\":\"bool\"}],\"name\":\"setBlacklist\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"policyID\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"blacklisted\",\"type\":\"bool\"},{\"internalType\":\"string\",\"name\":\"reason\",\"type\":\"string\"}],\"name\":\"setPolicyBlacklist\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"policyID\",\"type\":\"string\"}],\"name\":\"unVote\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"version\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"policyID\",\"type\":\"string\"}],\"name\":\"vote\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"votedOnProposal\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"name\":\"votes\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]"
+const Pv0SmartcontractABI = "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"blacklisted\",\"type\":\"bool\"}],\"name\":\"Blacklisted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"policyID\",\"type\":\"string\"}],\"name\":\"NewPolicy\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"policyID\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"blacklisted\",\"type\":\"bool\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"reason\",\"type\":\"string\"}],\"name\":\"PolicyBlacklisted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"previousAdminRole\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"newAdminRole\",\"type\":\"bytes32\"}],\"name\":\"RoleAdminChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"RoleGranted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"RoleRevoked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"policyID\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"totalVotes\",\"type\":\"uint256\"}],\"name\":\"UnVoted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"policyID\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"totalVotes\",\"type\":\"uint256\"}],\"name\":\"Voted\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"BLACKLISTER_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"DEFAULT_ADMIN_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"POLICY_BLACKLISTER_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"POLICY_CREATOR_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"policyID\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"bodyHash\",\"type\":\"string\"}],\"name\":\"createNewPolicy\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"}],\"name\":\"getRoleAdmin\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"grantRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"hasRole\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"isBlacklisted\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"name\":\"isPolicyBlacklisted\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"lastVoted\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"name\":\"policies\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"bodyHash\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"createdAt\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"name\":\"policyBlacklistedReason\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"renounceRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"revokeRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"blacklisted\",\"type\":\"bool\"}],\"name\":\"setBlacklist\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"policyID\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"blacklisted\",\"type\":\"bool\"},{\"internalType\":\"string\",\"name\":\"reason\",\"type\":\"string\"}],\"name\":\"setPolicyBlacklist\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"policyID\",\"type\":\"string\"}],\"name\":\"unVote\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"version\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"policyID\",\"type\":\"string\"}],\"name\":\"vote\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"votedOnProposal\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"name\":\"votes\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]"
 
 // Pv0Smartcontract is an auto generated Go binding around an Ethereum contract.
 type Pv0Smartcontract struct {
@@ -892,22 +892,17 @@ func (it *Pv0SmartcontractBlacklistedIterator) Close() error {
 
 // Pv0SmartcontractBlacklisted represents a Blacklisted event raised by the Pv0Smartcontract contract.
 type Pv0SmartcontractBlacklisted struct {
-	PolicyID    common.Address
+	User        common.Address
 	Blacklisted bool
 	Raw         types.Log // Blockchain specific contextual infos
 }
 
 // FilterBlacklisted is a free log retrieval operation binding the contract event 0xcf3473b85df1594d47b6958f29a32bea0abff9dd68296f7bf33443646793cfd8.
 //
-// Solidity: event Blacklisted(address indexed policyID, bool blacklisted)
-func (_Pv0Smartcontract *Pv0SmartcontractFilterer) FilterBlacklisted(opts *bind.FilterOpts, policyID []common.Address) (*Pv0SmartcontractBlacklistedIterator, error) {
+// Solidity: event Blacklisted(address user, bool blacklisted)
+func (_Pv0Smartcontract *Pv0SmartcontractFilterer) FilterBlacklisted(opts *bind.FilterOpts) (*Pv0SmartcontractBlacklistedIterator, error) {
 
-	var policyIDRule []interface{}
-	for _, policyIDItem := range policyID {
-		policyIDRule = append(policyIDRule, policyIDItem)
-	}
-
-	logs, sub, err := _Pv0Smartcontract.contract.FilterLogs(opts, "Blacklisted", policyIDRule)
+	logs, sub, err := _Pv0Smartcontract.contract.FilterLogs(opts, "Blacklisted")
 	if err != nil {
 		return nil, err
 	}
@@ -916,15 +911,10 @@ func (_Pv0Smartcontract *Pv0SmartcontractFilterer) FilterBlacklisted(opts *bind.
 
 // WatchBlacklisted is a free log subscription operation binding the contract event 0xcf3473b85df1594d47b6958f29a32bea0abff9dd68296f7bf33443646793cfd8.
 //
-// Solidity: event Blacklisted(address indexed policyID, bool blacklisted)
-func (_Pv0Smartcontract *Pv0SmartcontractFilterer) WatchBlacklisted(opts *bind.WatchOpts, sink chan<- *Pv0SmartcontractBlacklisted, policyID []common.Address) (event.Subscription, error) {
+// Solidity: event Blacklisted(address user, bool blacklisted)
+func (_Pv0Smartcontract *Pv0SmartcontractFilterer) WatchBlacklisted(opts *bind.WatchOpts, sink chan<- *Pv0SmartcontractBlacklisted) (event.Subscription, error) {
 
-	var policyIDRule []interface{}
-	for _, policyIDItem := range policyID {
-		policyIDRule = append(policyIDRule, policyIDItem)
-	}
-
-	logs, sub, err := _Pv0Smartcontract.contract.WatchLogs(opts, "Blacklisted", policyIDRule)
+	logs, sub, err := _Pv0Smartcontract.contract.WatchLogs(opts, "Blacklisted")
 	if err != nil {
 		return nil, err
 	}
@@ -958,7 +948,7 @@ func (_Pv0Smartcontract *Pv0SmartcontractFilterer) WatchBlacklisted(opts *bind.W
 
 // ParseBlacklisted is a log parse operation binding the contract event 0xcf3473b85df1594d47b6958f29a32bea0abff9dd68296f7bf33443646793cfd8.
 //
-// Solidity: event Blacklisted(address indexed policyID, bool blacklisted)
+// Solidity: event Blacklisted(address user, bool blacklisted)
 func (_Pv0Smartcontract *Pv0SmartcontractFilterer) ParseBlacklisted(log types.Log) (*Pv0SmartcontractBlacklisted, error) {
 	event := new(Pv0SmartcontractBlacklisted)
 	if err := _Pv0Smartcontract.contract.UnpackLog(event, "Blacklisted", log); err != nil {
@@ -1037,21 +1027,16 @@ func (it *Pv0SmartcontractNewPolicyIterator) Close() error {
 
 // Pv0SmartcontractNewPolicy represents a NewPolicy event raised by the Pv0Smartcontract contract.
 type Pv0SmartcontractNewPolicy struct {
-	PolicyID common.Hash
+	PolicyID string
 	Raw      types.Log // Blockchain specific contextual infos
 }
 
 // FilterNewPolicy is a free log retrieval operation binding the contract event 0x95cc192aad8600ab35c3acdf1de31ac530328faf0e80b4389d3809be48ff68a1.
 //
-// Solidity: event NewPolicy(string indexed policyID)
-func (_Pv0Smartcontract *Pv0SmartcontractFilterer) FilterNewPolicy(opts *bind.FilterOpts, policyID []string) (*Pv0SmartcontractNewPolicyIterator, error) {
+// Solidity: event NewPolicy(string policyID)
+func (_Pv0Smartcontract *Pv0SmartcontractFilterer) FilterNewPolicy(opts *bind.FilterOpts) (*Pv0SmartcontractNewPolicyIterator, error) {
 
-	var policyIDRule []interface{}
-	for _, policyIDItem := range policyID {
-		policyIDRule = append(policyIDRule, policyIDItem)
-	}
-
-	logs, sub, err := _Pv0Smartcontract.contract.FilterLogs(opts, "NewPolicy", policyIDRule)
+	logs, sub, err := _Pv0Smartcontract.contract.FilterLogs(opts, "NewPolicy")
 	if err != nil {
 		return nil, err
 	}
@@ -1060,15 +1045,10 @@ func (_Pv0Smartcontract *Pv0SmartcontractFilterer) FilterNewPolicy(opts *bind.Fi
 
 // WatchNewPolicy is a free log subscription operation binding the contract event 0x95cc192aad8600ab35c3acdf1de31ac530328faf0e80b4389d3809be48ff68a1.
 //
-// Solidity: event NewPolicy(string indexed policyID)
-func (_Pv0Smartcontract *Pv0SmartcontractFilterer) WatchNewPolicy(opts *bind.WatchOpts, sink chan<- *Pv0SmartcontractNewPolicy, policyID []string) (event.Subscription, error) {
+// Solidity: event NewPolicy(string policyID)
+func (_Pv0Smartcontract *Pv0SmartcontractFilterer) WatchNewPolicy(opts *bind.WatchOpts, sink chan<- *Pv0SmartcontractNewPolicy) (event.Subscription, error) {
 
-	var policyIDRule []interface{}
-	for _, policyIDItem := range policyID {
-		policyIDRule = append(policyIDRule, policyIDItem)
-	}
-
-	logs, sub, err := _Pv0Smartcontract.contract.WatchLogs(opts, "NewPolicy", policyIDRule)
+	logs, sub, err := _Pv0Smartcontract.contract.WatchLogs(opts, "NewPolicy")
 	if err != nil {
 		return nil, err
 	}
@@ -1102,7 +1082,7 @@ func (_Pv0Smartcontract *Pv0SmartcontractFilterer) WatchNewPolicy(opts *bind.Wat
 
 // ParseNewPolicy is a log parse operation binding the contract event 0x95cc192aad8600ab35c3acdf1de31ac530328faf0e80b4389d3809be48ff68a1.
 //
-// Solidity: event NewPolicy(string indexed policyID)
+// Solidity: event NewPolicy(string policyID)
 func (_Pv0Smartcontract *Pv0SmartcontractFilterer) ParseNewPolicy(log types.Log) (*Pv0SmartcontractNewPolicy, error) {
 	event := new(Pv0SmartcontractNewPolicy)
 	if err := _Pv0Smartcontract.contract.UnpackLog(event, "NewPolicy", log); err != nil {
@@ -1181,7 +1161,7 @@ func (it *Pv0SmartcontractPolicyBlacklistedIterator) Close() error {
 
 // Pv0SmartcontractPolicyBlacklisted represents a PolicyBlacklisted event raised by the Pv0Smartcontract contract.
 type Pv0SmartcontractPolicyBlacklisted struct {
-	PolicyID    common.Hash
+	PolicyID    string
 	Blacklisted bool
 	Reason      string
 	Raw         types.Log // Blockchain specific contextual infos
@@ -1189,15 +1169,10 @@ type Pv0SmartcontractPolicyBlacklisted struct {
 
 // FilterPolicyBlacklisted is a free log retrieval operation binding the contract event 0xe03285579bee722c625a02fb2b45070e578d9a320679123457906a0e90c9e6d3.
 //
-// Solidity: event PolicyBlacklisted(string indexed policyID, bool blacklisted, string reason)
-func (_Pv0Smartcontract *Pv0SmartcontractFilterer) FilterPolicyBlacklisted(opts *bind.FilterOpts, policyID []string) (*Pv0SmartcontractPolicyBlacklistedIterator, error) {
+// Solidity: event PolicyBlacklisted(string policyID, bool blacklisted, string reason)
+func (_Pv0Smartcontract *Pv0SmartcontractFilterer) FilterPolicyBlacklisted(opts *bind.FilterOpts) (*Pv0SmartcontractPolicyBlacklistedIterator, error) {
 
-	var policyIDRule []interface{}
-	for _, policyIDItem := range policyID {
-		policyIDRule = append(policyIDRule, policyIDItem)
-	}
-
-	logs, sub, err := _Pv0Smartcontract.contract.FilterLogs(opts, "PolicyBlacklisted", policyIDRule)
+	logs, sub, err := _Pv0Smartcontract.contract.FilterLogs(opts, "PolicyBlacklisted")
 	if err != nil {
 		return nil, err
 	}
@@ -1206,15 +1181,10 @@ func (_Pv0Smartcontract *Pv0SmartcontractFilterer) FilterPolicyBlacklisted(opts 
 
 // WatchPolicyBlacklisted is a free log subscription operation binding the contract event 0xe03285579bee722c625a02fb2b45070e578d9a320679123457906a0e90c9e6d3.
 //
-// Solidity: event PolicyBlacklisted(string indexed policyID, bool blacklisted, string reason)
-func (_Pv0Smartcontract *Pv0SmartcontractFilterer) WatchPolicyBlacklisted(opts *bind.WatchOpts, sink chan<- *Pv0SmartcontractPolicyBlacklisted, policyID []string) (event.Subscription, error) {
+// Solidity: event PolicyBlacklisted(string policyID, bool blacklisted, string reason)
+func (_Pv0Smartcontract *Pv0SmartcontractFilterer) WatchPolicyBlacklisted(opts *bind.WatchOpts, sink chan<- *Pv0SmartcontractPolicyBlacklisted) (event.Subscription, error) {
 
-	var policyIDRule []interface{}
-	for _, policyIDItem := range policyID {
-		policyIDRule = append(policyIDRule, policyIDItem)
-	}
-
-	logs, sub, err := _Pv0Smartcontract.contract.WatchLogs(opts, "PolicyBlacklisted", policyIDRule)
+	logs, sub, err := _Pv0Smartcontract.contract.WatchLogs(opts, "PolicyBlacklisted")
 	if err != nil {
 		return nil, err
 	}
@@ -1248,7 +1218,7 @@ func (_Pv0Smartcontract *Pv0SmartcontractFilterer) WatchPolicyBlacklisted(opts *
 
 // ParsePolicyBlacklisted is a log parse operation binding the contract event 0xe03285579bee722c625a02fb2b45070e578d9a320679123457906a0e90c9e6d3.
 //
-// Solidity: event PolicyBlacklisted(string indexed policyID, bool blacklisted, string reason)
+// Solidity: event PolicyBlacklisted(string policyID, bool blacklisted, string reason)
 func (_Pv0Smartcontract *Pv0SmartcontractFilterer) ParsePolicyBlacklisted(log types.Log) (*Pv0SmartcontractPolicyBlacklisted, error) {
 	event := new(Pv0SmartcontractPolicyBlacklisted)
 	if err := _Pv0Smartcontract.contract.UnpackLog(event, "PolicyBlacklisted", log); err != nil {
@@ -1813,22 +1783,17 @@ func (it *Pv0SmartcontractUnVotedIterator) Close() error {
 
 // Pv0SmartcontractUnVoted represents a UnVoted event raised by the Pv0Smartcontract contract.
 type Pv0SmartcontractUnVoted struct {
-	PolicyID   common.Hash
+	PolicyID   string
 	TotalVotes *big.Int
 	Raw        types.Log // Blockchain specific contextual infos
 }
 
 // FilterUnVoted is a free log retrieval operation binding the contract event 0x9f2a13e0b25fbc63d7ba5806ace0b766e1d5d3eb8df54062d9e5171be8a37fb9.
 //
-// Solidity: event UnVoted(string indexed policyID, uint256 totalVotes)
-func (_Pv0Smartcontract *Pv0SmartcontractFilterer) FilterUnVoted(opts *bind.FilterOpts, policyID []string) (*Pv0SmartcontractUnVotedIterator, error) {
+// Solidity: event UnVoted(string policyID, uint256 totalVotes)
+func (_Pv0Smartcontract *Pv0SmartcontractFilterer) FilterUnVoted(opts *bind.FilterOpts) (*Pv0SmartcontractUnVotedIterator, error) {
 
-	var policyIDRule []interface{}
-	for _, policyIDItem := range policyID {
-		policyIDRule = append(policyIDRule, policyIDItem)
-	}
-
-	logs, sub, err := _Pv0Smartcontract.contract.FilterLogs(opts, "UnVoted", policyIDRule)
+	logs, sub, err := _Pv0Smartcontract.contract.FilterLogs(opts, "UnVoted")
 	if err != nil {
 		return nil, err
 	}
@@ -1837,15 +1802,10 @@ func (_Pv0Smartcontract *Pv0SmartcontractFilterer) FilterUnVoted(opts *bind.Filt
 
 // WatchUnVoted is a free log subscription operation binding the contract event 0x9f2a13e0b25fbc63d7ba5806ace0b766e1d5d3eb8df54062d9e5171be8a37fb9.
 //
-// Solidity: event UnVoted(string indexed policyID, uint256 totalVotes)
-func (_Pv0Smartcontract *Pv0SmartcontractFilterer) WatchUnVoted(opts *bind.WatchOpts, sink chan<- *Pv0SmartcontractUnVoted, policyID []string) (event.Subscription, error) {
+// Solidity: event UnVoted(string policyID, uint256 totalVotes)
+func (_Pv0Smartcontract *Pv0SmartcontractFilterer) WatchUnVoted(opts *bind.WatchOpts, sink chan<- *Pv0SmartcontractUnVoted) (event.Subscription, error) {
 
-	var policyIDRule []interface{}
-	for _, policyIDItem := range policyID {
-		policyIDRule = append(policyIDRule, policyIDItem)
-	}
-
-	logs, sub, err := _Pv0Smartcontract.contract.WatchLogs(opts, "UnVoted", policyIDRule)
+	logs, sub, err := _Pv0Smartcontract.contract.WatchLogs(opts, "UnVoted")
 	if err != nil {
 		return nil, err
 	}
@@ -1879,7 +1839,7 @@ func (_Pv0Smartcontract *Pv0SmartcontractFilterer) WatchUnVoted(opts *bind.Watch
 
 // ParseUnVoted is a log parse operation binding the contract event 0x9f2a13e0b25fbc63d7ba5806ace0b766e1d5d3eb8df54062d9e5171be8a37fb9.
 //
-// Solidity: event UnVoted(string indexed policyID, uint256 totalVotes)
+// Solidity: event UnVoted(string policyID, uint256 totalVotes)
 func (_Pv0Smartcontract *Pv0SmartcontractFilterer) ParseUnVoted(log types.Log) (*Pv0SmartcontractUnVoted, error) {
 	event := new(Pv0SmartcontractUnVoted)
 	if err := _Pv0Smartcontract.contract.UnpackLog(event, "UnVoted", log); err != nil {
@@ -1958,22 +1918,17 @@ func (it *Pv0SmartcontractVotedIterator) Close() error {
 
 // Pv0SmartcontractVoted represents a Voted event raised by the Pv0Smartcontract contract.
 type Pv0SmartcontractVoted struct {
-	PolicyID   common.Hash
+	PolicyID   string
 	TotalVotes *big.Int
 	Raw        types.Log // Blockchain specific contextual infos
 }
 
 // FilterVoted is a free log retrieval operation binding the contract event 0x82ea01a4479f27996bbe8de24f4c8d962035fe2f32a2b130c8c9ca593ab91aa8.
 //
-// Solidity: event Voted(string indexed policyID, uint256 totalVotes)
-func (_Pv0Smartcontract *Pv0SmartcontractFilterer) FilterVoted(opts *bind.FilterOpts, policyID []string) (*Pv0SmartcontractVotedIterator, error) {
+// Solidity: event Voted(string policyID, uint256 totalVotes)
+func (_Pv0Smartcontract *Pv0SmartcontractFilterer) FilterVoted(opts *bind.FilterOpts) (*Pv0SmartcontractVotedIterator, error) {
 
-	var policyIDRule []interface{}
-	for _, policyIDItem := range policyID {
-		policyIDRule = append(policyIDRule, policyIDItem)
-	}
-
-	logs, sub, err := _Pv0Smartcontract.contract.FilterLogs(opts, "Voted", policyIDRule)
+	logs, sub, err := _Pv0Smartcontract.contract.FilterLogs(opts, "Voted")
 	if err != nil {
 		return nil, err
 	}
@@ -1982,15 +1937,10 @@ func (_Pv0Smartcontract *Pv0SmartcontractFilterer) FilterVoted(opts *bind.Filter
 
 // WatchVoted is a free log subscription operation binding the contract event 0x82ea01a4479f27996bbe8de24f4c8d962035fe2f32a2b130c8c9ca593ab91aa8.
 //
-// Solidity: event Voted(string indexed policyID, uint256 totalVotes)
-func (_Pv0Smartcontract *Pv0SmartcontractFilterer) WatchVoted(opts *bind.WatchOpts, sink chan<- *Pv0SmartcontractVoted, policyID []string) (event.Subscription, error) {
+// Solidity: event Voted(string policyID, uint256 totalVotes)
+func (_Pv0Smartcontract *Pv0SmartcontractFilterer) WatchVoted(opts *bind.WatchOpts, sink chan<- *Pv0SmartcontractVoted) (event.Subscription, error) {
 
-	var policyIDRule []interface{}
-	for _, policyIDItem := range policyID {
-		policyIDRule = append(policyIDRule, policyIDItem)
-	}
-
-	logs, sub, err := _Pv0Smartcontract.contract.WatchLogs(opts, "Voted", policyIDRule)
+	logs, sub, err := _Pv0Smartcontract.contract.WatchLogs(opts, "Voted")
 	if err != nil {
 		return nil, err
 	}
@@ -2024,7 +1974,7 @@ func (_Pv0Smartcontract *Pv0SmartcontractFilterer) WatchVoted(opts *bind.WatchOp
 
 // ParseVoted is a log parse operation binding the contract event 0x82ea01a4479f27996bbe8de24f4c8d962035fe2f32a2b130c8c9ca593ab91aa8.
 //
-// Solidity: event Voted(string indexed policyID, uint256 totalVotes)
+// Solidity: event Voted(string policyID, uint256 totalVotes)
 func (_Pv0Smartcontract *Pv0SmartcontractFilterer) ParseVoted(log types.Log) (*Pv0SmartcontractVoted, error) {
 	event := new(Pv0SmartcontractVoted)
 	if err := _Pv0Smartcontract.contract.UnpackLog(event, "Voted", log); err != nil {
