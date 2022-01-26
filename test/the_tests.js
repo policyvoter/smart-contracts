@@ -34,26 +34,6 @@ describe("PolicyVoter Tests", function () {
 	it("simple create policies", async function () {
 		await expect(
 			pv.createNewPolicy(
-				acc1.address,
-				"a1b2c3",
-				"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
-			)
-		).to.emit(pv, "NewPolicy")
-	})
-
-	it("can create policy if account is removed from blacklist", async function () {
-		await pv.setBlacklist(acc1.address, true)
-		await expect(
-			pv.createNewPolicy(
-				acc1.address,
-				"a1b2c3",
-				"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
-			)
-		).to.be.revertedWith("account is blacklisted")
-		await pv.setBlacklist(acc1.address, false)
-		await expect(
-			pv.createNewPolicy(
-				acc1.address,
 				"a1b2c3",
 				"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
 			)
@@ -76,7 +56,6 @@ describe("PolicyVoter Tests", function () {
 	it("simple vote", async function () {
 		await expect(
 			pv.createNewPolicy(
-				acc1.address,
 				"a1b2c3",
 				"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
 			)
@@ -87,7 +66,6 @@ describe("PolicyVoter Tests", function () {
 	it("votes increase ok", async function () {
 		await expect(
 			pv.createNewPolicy(
-				acc1.address,
 				"a1b2c3",
 				"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
 			)
@@ -116,7 +94,6 @@ describe("PolicyVoter Tests", function () {
 	it("votes decrease ok", async function () {
 		await expect(
 			pv.createNewPolicy(
-				acc1.address,
 				"a1b2c3",
 				"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
 			)
@@ -133,7 +110,6 @@ describe("PolicyVoter Tests", function () {
 	it("can vote or unvote a removed from blacklisted policy", async function () {
 		await expect(
 			pv.createNewPolicy(
-				acc1.address,
 				"a1b2c3",
 				"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
 			)

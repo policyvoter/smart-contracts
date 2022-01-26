@@ -34,19 +34,17 @@ describe("PolicyVoter Negative Tests", function () {
 			pv
 				.connect(acc1)
 				.createNewPolicy(
-					acc1.address,
 					"a1b2c3",
 					"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
 				)
 		).to.to.be.revertedWith(
-			"account 0x4dd845ffafa516440de9e3f1360d846166bc398c is missing role 0x90fe2ba5da14f172ed5a0a0fec391dbf8f191c9a2f3557d79ede5d6b1c1c9ffb"
+			"account 0xda1e73f132559a9b6b45503e139b1ec5f51c805d is missing role 0x90fe2ba5da14f172ed5a0a0fec391dbf8f191c9a2f3557d79ede5d6b1c1c9ffb"
 		)
 	})
 
 	it("can't create the same policy two times", async function () {
 		await expect(
 			pv.createNewPolicy(
-				acc1.address,
 				"a1b2c3",
 				"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
 			)
@@ -54,22 +52,10 @@ describe("PolicyVoter Negative Tests", function () {
 
 		await expect(
 			pv.createNewPolicy(
-				acc1.address,
 				"a1b2c3",
 				"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
 			)
 		).to.to.be.revertedWith("policyID already exists")
-	})
-
-	it("can't create the a policy by a blacklisted creator", async function () {
-		await pv.setBlacklist(acc1.address, true)
-		await expect(
-			pv.createNewPolicy(
-				acc1.address,
-				"a1b2c3",
-				"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
-			)
-		).to.be.revertedWith("account is blacklisted")
 	})
 
 	// function vote(string memory policyID) external nonReentrant {
@@ -88,7 +74,6 @@ describe("PolicyVoter Negative Tests", function () {
 	it("can't vote too fast", async function () {
 		await expect(
 			pv.createNewPolicy(
-				acc1.address,
 				"a1b2c3",
 				"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
 			)
@@ -101,7 +86,6 @@ describe("PolicyVoter Negative Tests", function () {
 	it("can't vote two times", async function () {
 		await expect(
 			pv.createNewPolicy(
-				acc1.address,
 				"a1b2c3",
 				"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
 			)
@@ -110,19 +94,6 @@ describe("PolicyVoter Negative Tests", function () {
 		await expect(pv.connect(acc1).vote("a1b2c3")).to.emit(pv, "Voted")
 		await waitForSeconds(31)
 		await expect(pv.connect(acc1).vote("a1b2c3")).to.be.revertedWith("already voted")
-	})
-
-	it("can't vote if blacklisted", async function () {
-		await expect(
-			pv.createNewPolicy(
-				acc1.address,
-				"a1b2c3",
-				"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
-			)
-		).to.emit(pv, "NewPolicy")
-
-		await pv.setBlacklist(acc2.address, true)
-		await expect(pv.connect(acc2).vote("a1b2c3")).to.be.revertedWith("account is blacklisted")
 	})
 
 	// 	/**
@@ -141,7 +112,6 @@ describe("PolicyVoter Negative Tests", function () {
 	it("can't unvote a not voted project", async function () {
 		await expect(
 			pv.createNewPolicy(
-				acc1.address,
 				"a1b2c3",
 				"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
 			)
@@ -152,7 +122,6 @@ describe("PolicyVoter Negative Tests", function () {
 	it("can't *UNVOTE* multiple times", async function () {
 		await expect(
 			pv.createNewPolicy(
-				acc1.address,
 				"a1b2c3",
 				"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
 			)
@@ -164,23 +133,9 @@ describe("PolicyVoter Negative Tests", function () {
 		await expect(pv.connect(acc2).unVote("a1b2c3")).to.be.revertedWith("not voted")
 	})
 
-	it("can't unvote from a blacklisted account", async function () {
-		await expect(
-			pv.createNewPolicy(
-				acc1.address,
-				"a1b2c3",
-				"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
-			)
-		).to.emit(pv, "NewPolicy")
-		await expect(pv.connect(acc2).vote("a1b2c3")).to.emit(pv, "Voted")
-		await pv.setBlacklist(acc2.address, true)
-		await expect(pv.connect(acc2).unVote("a1b2c3")).to.be.revertedWith("account is blacklisted")
-	})
-
 	it("can't vote or unvote a blacklisted policy", async function () {
 		await expect(
 			pv.createNewPolicy(
-				acc1.address,
 				"a1b2c3",
 				"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
 			)
