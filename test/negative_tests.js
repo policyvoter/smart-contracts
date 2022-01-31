@@ -18,6 +18,11 @@ describe("PolicyVoter Negative Tests", function () {
 		acc1 = signers[1]
 		acc2 = signers[2]
 		acc3 = signers[3]
+
+		await pv.registerAddress(owner.address, true)
+		await pv.registerAddress(acc1.address, true)
+		await pv.registerAddress(acc2.address, true)
+		await pv.registerAddress(acc3.address, true)
 	})
 
 	it("simple test...", async function () {
@@ -30,15 +35,13 @@ describe("PolicyVoter Negative Tests", function () {
 	})
 
 	it("can't policies if you're not POLICY_CREATOR_ROLE", async function () {
-		await expect(
+		await expectRevert.unspecified(
 			pv
 				.connect(acc1)
 				.createNewPolicy(
 					"a1b2c3",
 					"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
 				)
-		).to.to.be.revertedWith(
-			"account 0xda1e73f132559a9b6b45503e139b1ec5f51c805d is missing role 0x90fe2ba5da14f172ed5a0a0fec391dbf8f191c9a2f3557d79ede5d6b1c1c9ffb"
 		)
 	})
 
@@ -116,7 +119,7 @@ describe("PolicyVoter Negative Tests", function () {
 				"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
 			)
 		).to.emit(pv, "NewPolicy")
-		await expect(pv.connect(acc2).unVote("a1b2c3")).to.be.revertedWith("not voted")
+		await expect(pv.connect(acc2).unVote("a1b2c3")).to.be.revertedWith("didn't voted")
 	})
 
 	it("can't *UNVOTE* multiple times", async function () {
@@ -130,7 +133,7 @@ describe("PolicyVoter Negative Tests", function () {
 		await expect(pv.connect(acc1).vote("a1b2c3")).to.emit(pv, "Voted")
 		await expect(pv.connect(acc1).unVote("a1b2c3")).to.emit(pv, "UnVoted")
 
-		await expect(pv.connect(acc2).unVote("a1b2c3")).to.be.revertedWith("not voted")
+		await expect(pv.connect(acc2).unVote("a1b2c3")).to.be.revertedWith("didn't voted")
 	})
 
 	it("can't vote or unvote a blacklisted policy", async function () {

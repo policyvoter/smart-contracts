@@ -18,6 +18,11 @@ describe("PolicyVoter Tests", function () {
 		acc1 = signers[1]
 		acc2 = signers[2]
 		acc3 = signers[3]
+
+		await pv.registerAddress(owner.address, true)
+		await pv.registerAddress(acc1.address, true)
+		await pv.registerAddress(acc2.address, true)
+		await pv.registerAddress(acc3.address, true)
 	})
 
 	it("simple test...", async function () {
@@ -61,6 +66,26 @@ describe("PolicyVoter Tests", function () {
 			)
 		).to.emit(pv, "NewPolicy")
 		await expect(pv.vote("a1b2c3")).to.emit(pv, "Voted")
+	})
+
+	it("simple vote on two policies", async function () {
+		await expect(
+			pv.createNewPolicy(
+				"a1b2c3",
+				"b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
+			)
+		).to.emit(pv, "NewPolicy")
+
+		await expect(
+			pv.createNewPolicy(
+				"a1b2c4",
+				"e94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
+			)
+		).to.emit(pv, "NewPolicy")
+
+		await expect(pv.vote("a1b2c3")).to.emit(pv, "Voted")
+		await waitForSeconds(31)
+		await expect(pv.vote("a1b2c4")).to.emit(pv, "Voted")
 	})
 
 	it("votes increase ok", async function () {

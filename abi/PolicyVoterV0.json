@@ -543,17 +543,17 @@
   {
     "inputs": [
       {
-        "internalType": "address",
+        "internalType": "bytes32",
         "name": "",
-        "type": "address"
+        "type": "bytes32"
       }
     ],
     "name": "votedOnProposal",
     "outputs": [
       {
-        "internalType": "string",
+        "internalType": "bool",
         "name": "",
-        "type": "string"
+        "type": "bool"
       }
     ],
     "stateMutability": "view",

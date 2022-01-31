@@ -25,7 +25,7 @@ contract PolicyVoterV0 is ReentrancyGuard, AccessControl {
 	mapping(string => Policy) public policies; //policyID - Policy
 	mapping(string => uint256) public votes; //policyID - votes
 	mapping(address => uint256) public lastVoted; //prevents spamming
-	mapping(address => string) public votedOnProposal; //voted on proposal or not
+	mapping(bytes32 => bool) public votedOnProposal; //voted on proposal or not
 	mapping(address => bool) public registered; //registers an address with the system
 
 	//blacklists
@@ -78,11 +78,14 @@ contract PolicyVoterV0 is ReentrancyGuard, AccessControl {
 		require(tx.origin == msg.sender, "no contracts allowed");
 		require(lastVoted[msg.sender] < block.timestamp - 30, "30 seconds between votes");
 		require(!isPolicyBlacklisted[policyID], "policy is blacklisted");
-		require(bytes(votedOnProposal[msg.sender]).length == 0, "already voted");
+
 		require(policies[policyID].createdAt != 0, "policy not found");
 		require(registered[msg.sender], "address not registered");
 
-		votedOnProposal[msg.sender] = policyID;
+		bytes32 keyVoted = computeKeyVotedOnProposal(msg.sender, policyID);
+		require(votedOnProposal[keyVoted] == false, "already voted");
+
+		votedOnProposal[keyVoted] = true;
 
 		votes[policyID] = votes[policyID] + 1;
 		lastVoted[msg.sender] = block.timestamp;
@@ -96,12 +99,14 @@ contract PolicyVoterV0 is ReentrancyGuard, AccessControl {
 	 */
 	function unVote(string memory policyID) external nonReentrant {
 		require(tx.origin == msg.sender, "no contracts allowed");
-		require(bytes(votedOnProposal[msg.sender]).length > 0, "not voted");
 		require(!isPolicyBlacklisted[policyID], "policy is blacklisted");
 		require(registered[msg.sender], "address not registered");
 
+		bytes32 keyVoted = computeKeyVotedOnProposal(msg.sender, policyID);
+		require(votedOnProposal[keyVoted] == true, "didn't voted");
+
 		votes[policyID] = votes[policyID] - 1;
-		delete votedOnProposal[msg.sender];
+		delete votedOnProposal[keyVoted];
 
 		emit UnVoted(policyID, votes[policyID]);
 	}
@@ -117,5 +122,17 @@ contract PolicyVoterV0 is ReentrancyGuard, AccessControl {
 		isPolicyBlacklisted[policyID] = blacklisted;
 		policyBlacklistedReason[policyID] = reason;
 		emit PolicyBlacklisted(policyID, blacklisted, reason);
+	}
+
+	/**
+	 * @dev Computes the key for votedOnProposal
+	 */
+	function computeKeyVotedOnProposal(address voter, string memory policyID)
+		internal
+		pure
+		virtual
+		returns (bytes32)
+	{
+		return keccak256(abi.encodePacked(voter, policyID));
 	}
 }
