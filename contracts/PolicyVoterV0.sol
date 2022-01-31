@@ -12,9 +12,10 @@ contract PolicyVoterV0 is ReentrancyGuard, AccessControl {
 
 	//blacklist can't vote or propose new policies
 	bytes32 public constant POLICY_CREATOR_ROLE = keccak256("POLICY_CREATOR_ROLE");
+	bytes32 public constant ADDRESS_REGISTER_ROLE = keccak256("ADDRESS_REGISTER_ROLE");
 	bytes32 public constant POLICY_BLACKLISTER_ROLE = keccak256("POLICY_BLACKLISTER_ROLE");
 
-	string public version = "0.0.2";
+	string public version = "0.0.3";
 
 	struct Policy {
 		string bodyHash;
@@ -23,8 +24,9 @@ contract PolicyVoterV0 is ReentrancyGuard, AccessControl {
 
 	mapping(string => Policy) public policies; //policyID - Policy
 	mapping(string => uint256) public votes; //policyID - votes
-	mapping(address => uint256) public lastVoted; //prevents some spamming
+	mapping(address => uint256) public lastVoted; //prevents spamming
 	mapping(address => string) public votedOnProposal; //voted on proposal or not
+	mapping(address => bool) public registered; //registers an address with the system
 
 	//blacklists
 	mapping(string => bool) public isPolicyBlacklisted; //can't vote on it
@@ -40,6 +42,18 @@ contract PolicyVoterV0 is ReentrancyGuard, AccessControl {
 		_setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
 		_setupRole(POLICY_CREATOR_ROLE, msg.sender);
 		_setupRole(POLICY_BLACKLISTER_ROLE, msg.sender);
+		_setupRole(ADDRESS_REGISTER_ROLE, msg.sender);
+	}
+
+	/**
+		@notice registers/unregisters an address with the system
+		@param newAddress - user's address
+	 */
+	function registerAddress(address newAddress, bool isRegistered)
+		external
+		onlyRole(ADDRESS_REGISTER_ROLE)
+	{
+		registered[newAddress] = isRegistered;
 	}
 
 	/**
@@ -66,6 +80,7 @@ contract PolicyVoterV0 is ReentrancyGuard, AccessControl {
 		require(!isPolicyBlacklisted[policyID], "policy is blacklisted");
 		require(bytes(votedOnProposal[msg.sender]).length == 0, "already voted");
 		require(policies[policyID].createdAt != 0, "policy not found");
+		require(registered[msg.sender], "address not registered");
 
 		votedOnProposal[msg.sender] = policyID;
 
@@ -83,6 +98,7 @@ contract PolicyVoterV0 is ReentrancyGuard, AccessControl {
 		require(tx.origin == msg.sender, "no contracts allowed");
 		require(bytes(votedOnProposal[msg.sender]).length > 0, "not voted");
 		require(!isPolicyBlacklisted[policyID], "policy is blacklisted");
+		require(registered[msg.sender], "address not registered");
 
 		votes[policyID] = votes[policyID] - 1;
 		delete votedOnProposal[msg.sender];
