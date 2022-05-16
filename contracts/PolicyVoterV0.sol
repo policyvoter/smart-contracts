@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.11;
+pragma solidity 0.8.13;
 
 import "@openzeppelin/contracts/utils/Address.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
@@ -15,7 +15,7 @@ contract PolicyVoterV0 is ReentrancyGuard, AccessControl {
 	bytes32 public constant ADDRESS_REGISTER_ROLE = keccak256("ADDRESS_REGISTER_ROLE");
 	bytes32 public constant POLICY_BLACKLISTER_ROLE = keccak256("POLICY_BLACKLISTER_ROLE");
 
-	string public version = "0.0.3";
+	string public version = "0.0.4";
 
 	struct Policy {
 		string bodyHash;
@@ -27,6 +27,8 @@ contract PolicyVoterV0 is ReentrancyGuard, AccessControl {
 	mapping(address => uint256) public lastVoted; //prevents spamming
 	mapping(bytes32 => bool) public votedOnProposal; //voted on proposal or not
 	mapping(address => bool) public registered; //registers an address with the system
+
+	uint256 public minIntervalBetweenVotes = 1 seconds;
 
 	//blacklists
 	mapping(string => bool) public isPolicyBlacklisted; //can't vote on it
@@ -57,6 +59,17 @@ contract PolicyVoterV0 is ReentrancyGuard, AccessControl {
 	}
 
 	/**
+		@notice registers/unregisters an address with the system
+		@param newMinInterval - new interval in seconds
+	 */
+	function setMinIntervalBetweenVotes(uint256 newMinInterval)
+		external
+		onlyRole(DEFAULT_ADMIN_ROLE)
+	{
+		minIntervalBetweenVotes = newMinInterval;
+	}
+
+	/**
 		@notice creates a new policy
 		@param policyID - the policy ID from the database
 		@param bodyHash - the hash of this policy body
@@ -76,7 +89,7 @@ contract PolicyVoterV0 is ReentrancyGuard, AccessControl {
 	 */
 	function vote(string memory policyID) external nonReentrant {
 		require(tx.origin == msg.sender, "no contracts allowed");
-		require(lastVoted[msg.sender] < block.timestamp - 30, "30 seconds between votes");
+		require(lastVoted[msg.sender] < block.timestamp - minIntervalBetweenVotes, "spam vote");
 		require(!isPolicyBlacklisted[policyID], "policy is blacklisted");
 
 		require(policies[policyID].createdAt != 0, "policy not found");

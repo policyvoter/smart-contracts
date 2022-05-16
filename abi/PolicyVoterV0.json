@@ -344,6 +344,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "minIntervalBetweenVotes",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "string",
@@ -455,6 +468,19 @@
       }
     ],
     "name": "revokeRole",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "newMinInterval",
+        "type": "uint256"
+      }
+    ],
+    "name": "setMinIntervalBetweenVotes",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
