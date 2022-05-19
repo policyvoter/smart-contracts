@@ -28,7 +28,7 @@ contract PolicyVoterV0 is ReentrancyGuard, AccessControl {
 	mapping(bytes32 => bool) public votedOnProposal; //voted on proposal or not
 	mapping(address => bool) public registered; //registers an address with the system
 
-	uint256 public minIntervalBetweenVotes = 1 seconds;
+	uint256 public minIntervalBetweenVotes = 3 seconds;
 
 	//blacklists
 	mapping(string => bool) public isPolicyBlacklisted; //can't vote on it
