@@ -1,6 +1,6 @@
 # PolicyVoter Smart Contracts
 
-Contract @ 0x310c97b0F14C77F12CD065F5eF1B30DaBF21D897
+Contract @ 0x1D0BC711C59bFbc58155bf3EfAd11B3e98db5e1b
 
 Work in progress...stay away
 
