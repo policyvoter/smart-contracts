@@ -1,21 +1,19 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.15;
+pragma solidity 0.8.17;
 
 import "@openzeppelin/contracts/utils/Address.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
-import "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 
 contract PolicyVoterV0 is ReentrancyGuard, AccessControl {
 	using Address for address;
-	using EnumerableSet for EnumerableSet.AddressSet;
 
 	//blacklist can't vote or propose new policies
 	bytes32 public constant POLICY_CREATOR_ROLE = keccak256("POLICY_CREATOR_ROLE");
 	bytes32 public constant ADDRESS_REGISTER_ROLE = keccak256("ADDRESS_REGISTER_ROLE");
 	bytes32 public constant POLICY_BLACKLISTER_ROLE = keccak256("POLICY_BLACKLISTER_ROLE");
 
-	string public version = "0.0.4";
+	string public version = "0.0.5";
 
 	struct Policy {
 		string bodyHash;
@@ -28,7 +26,7 @@ contract PolicyVoterV0 is ReentrancyGuard, AccessControl {
 	mapping(bytes32 => bool) public votedOnProposal; //voted on proposal or not
 	mapping(address => bool) public registered; //registers an address with the system
 
-	uint256 public minIntervalBetweenVotes = 3 seconds;
+	uint256 public minIntervalBetweenVotes = 3 seconds; //block time is also 3 seconds, lower doesn't matter
 
 	//blacklists
 	mapping(string => bool) public isPolicyBlacklisted; //can't vote on it
