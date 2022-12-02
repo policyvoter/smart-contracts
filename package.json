@@ -10,6 +10,7 @@
 		"testGas": "REPORT_GAS=true npx hardhat test --network ganache",
 		"prettier": "prettier --write 'contracts/**/*.sol'",
 		"deploy:pv": "NETWORK=policy_voter npx hardhat run --network policy_voter scripts/deploy.js",
+		"deploy_choices:pv": "NETWORK=policy_voter npx hardhat run --network policy_voter scripts/deploy_choices.js",
 		"a_script": "NETWORK=policy_voter npx hardhat run --network policy_voter scripts/a_script.js"
 	},
 	"author": "https://policyvoter.com",
