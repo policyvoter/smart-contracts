@@ -23,7 +23,7 @@ async function main() {
     "ETH"
   );
 
-  let PVContract = await hre.ethers.getContractFactory("PolicyVoterV0");
+  let PVContract = await hre.ethers.getContractFactory("PolicyVoterV1");
   console.log("Deploying PolicyVoter Contract...");
   let deployed = await PVContract.deploy();
   let pv = await deployed.deployed();

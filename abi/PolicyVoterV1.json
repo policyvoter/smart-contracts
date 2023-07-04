@@ -31,6 +31,12 @@
         "internalType": "string",
         "name": "policyID",
         "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "groupID",
+        "type": "uint256"
       }
     ],
     "name": "NewPolicy",
@@ -148,6 +154,12 @@
       {
         "indexed": false,
         "internalType": "uint256",
+        "name": "groupID",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
         "name": "totalVotes",
         "type": "uint256"
       }
@@ -163,6 +175,12 @@
         "internalType": "string",
         "name": "policyID",
         "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "groupID",
+        "type": "uint256"
       },
       {
         "indexed": false,
@@ -234,6 +252,11 @@
         "type": "string"
       },
       {
+        "internalType": "uint256",
+        "name": "gID",
+        "type": "uint256"
+      },
+      {
         "internalType": "string",
         "name": "bodyHash",
         "type": "string"
@@ -279,6 +302,25 @@
     "name": "grantRole",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "groupForAddress",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -373,6 +415,11 @@
       },
       {
         "internalType": "uint256",
+        "name": "groupID",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
         "name": "createdAt",
         "type": "uint256"
       }
@@ -410,6 +457,11 @@
         "internalType": "bool",
         "name": "isRegistered",
         "type": "bool"
+      },
+      {
+        "internalType": "uint256",
+        "name": "groupID",
+        "type": "uint256"
       }
     ],
     "name": "registerAddress",

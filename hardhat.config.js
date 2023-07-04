@@ -7,7 +7,7 @@ require("hardhat-abi-exporter");
 
 module.exports = {
   solidity: {
-    version: "0.8.17",
+    version: "0.8.19",
     settings: {
       optimizer: {
         enabled: true,
@@ -37,10 +37,6 @@ module.exports = {
       timeout: 35000,
       accounts: [process.env.PRIVATE_KEY],
     },
-  },
-  gasReporter: {
-    enabled: !!process.env.REPORT_GAS === true,
-    showTimeSpent: true,
   },
   mocha: {
     timeout: 25000,
