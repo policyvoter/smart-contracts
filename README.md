@@ -12,8 +12,7 @@ New votes:
 - remember that voting/unvoting doesn't pass though our backend and goes directly to the smart contract
 - checkout the smart contract code in this repo under `/contracts`
 - the smart contract's latest address is published above
-
-- take note of you address
+- take note of your address (you can find it in the browser's localstorage)
 - download the blocks when you pass a vote and check if your vote is registered correctly (for example an easy way is to check if the event ` emit Voted(policyID, policies[policyID].groupID, votes[policyID]);` or `Unvoted` is triggered.
 - if you would like to host a node please contact us and we'll give you an enode address
 
