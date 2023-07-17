@@ -93,8 +93,6 @@ contract PolicyVoterV1 is ReentrancyGuard, AccessControl {
       "policyID already exists"
     );
 
-    require(groupForAddress[msg.sender] == gID, "gID not appropriate");
-
     policies[policyID] = Policy({
       bodyHash: bodyHash,
       groupID: gID,
@@ -119,7 +117,7 @@ contract PolicyVoterV1 is ReentrancyGuard, AccessControl {
 
     require(
       policies[policyID].groupID != groupForAddress[msg.sender],
-      "you can only post policies in your group"
+      "you can only vote policies in your group"
     );
 
     require(registered[msg.sender], "address not registered");
@@ -145,7 +143,7 @@ contract PolicyVoterV1 is ReentrancyGuard, AccessControl {
 
     require(
       policies[policyID].groupID != groupForAddress[msg.sender],
-      "you can only post policies in your group"
+      "you can only unvote policies in your group"
     );
 
     require(registered[msg.sender], "address not registered");
