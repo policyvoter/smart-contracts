@@ -14,7 +14,7 @@ let owner, acc1, acc2, acc3;
 
 describe("PolicyVoter Negative Tests", function () {
   beforeEach(async function () {
-    let TContract = await ethers.getContractFactory("PolicyVoterV0");
+    let TContract = await ethers.getContractFactory("PolicyVoterV1");
 
     pv = await TContract.deploy();
     await pv.deployed();
@@ -25,10 +25,10 @@ describe("PolicyVoter Negative Tests", function () {
     acc2 = signers[2];
     acc3 = signers[3];
 
-    await pv.registerAddress(owner.address, true);
-    await pv.registerAddress(acc1.address, true);
-    await pv.registerAddress(acc2.address, true);
-    await pv.registerAddress(acc3.address, true);
+    await pv.registerAddress(owner.address, true, 1);
+    await pv.registerAddress(acc1.address, true, 1);
+    await pv.registerAddress(acc2.address, true, 1);
+    await pv.registerAddress(acc3.address, true, 2);
   });
 
   it("simple test...", async function () {
@@ -46,6 +46,7 @@ describe("PolicyVoter Negative Tests", function () {
         .connect(acc1)
         .createNewPolicy(
           "a1b2c3",
+          1,
           "b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
         )
     );
@@ -55,6 +56,7 @@ describe("PolicyVoter Negative Tests", function () {
     await expect(
       pv.createNewPolicy(
         "a1b2c3",
+        1,
         "b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
       )
     ).to.emit(pv, "NewPolicy");
@@ -62,6 +64,7 @@ describe("PolicyVoter Negative Tests", function () {
     await expect(
       pv.createNewPolicy(
         "a1b2c3",
+        1,
         "b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
       )
     ).to.to.be.revertedWith("policyID already exists");
@@ -84,6 +87,7 @@ describe("PolicyVoter Negative Tests", function () {
     await expect(
       pv.createNewPolicy(
         "a1b2c3",
+        1,
         "b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
       )
     ).to.emit(pv, "NewPolicy");
@@ -98,6 +102,7 @@ describe("PolicyVoter Negative Tests", function () {
     await expect(
       pv.createNewPolicy(
         "a1b2c3",
+        1,
         "b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
       )
     ).to.emit(pv, "NewPolicy");
@@ -126,6 +131,7 @@ describe("PolicyVoter Negative Tests", function () {
     await expect(
       pv.createNewPolicy(
         "a1b2c3",
+        1,
         "b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
       )
     ).to.emit(pv, "NewPolicy");
@@ -134,10 +140,24 @@ describe("PolicyVoter Negative Tests", function () {
     );
   });
 
+  it("can't vote a policy not in your group", async function () {
+    await expect(
+      pv.createNewPolicy(
+        "a1b2c3",
+        1,
+        "b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
+      )
+    ).to.emit(pv, "NewPolicy");
+    await expect(pv.connect(acc3).vote("a1b2c3")).to.be.revertedWith(
+      "you can only vote policies in your group"
+    );
+  });
+
   it("can't *UNVOTE* multiple times", async function () {
     await expect(
       pv.createNewPolicy(
         "a1b2c3",
+        1,
         "b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
       )
     ).to.emit(pv, "NewPolicy");
@@ -154,6 +174,7 @@ describe("PolicyVoter Negative Tests", function () {
     await expect(
       pv.createNewPolicy(
         "a1b2c3",
+        1,
         "b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
       )
     ).to.emit(pv, "NewPolicy");

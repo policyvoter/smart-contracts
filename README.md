@@ -1,6 +1,6 @@
 # PolicyVoter Smart Contracts V2
 
-deloyed: 0x7a9818Dc8Fc73855109aEF43d7208711b1f3C83f
+deloyed: 0xA4332d4C349847488b805A49C0f9113F24ed1267
 
 ## Instructions to verify authenticity
 

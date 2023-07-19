@@ -35,7 +35,7 @@ contract PolicyVoterV1 is ReentrancyGuard, AccessControl {
   //blacklists
   mapping(string => bool) public isPolicyBlacklisted; //can't vote on it
   mapping(string => string) public policyBlacklistedReason; //reason why it was blacklisted
-  mapping(address => uint256) public groupForAddress; //the group that this address belongs to (0 no pilot)
+  mapping(address => uint256) public groupForAddress; //the group that this address belongs to (0 is public)
 
   event NewPolicy(string policyID, uint256 groupID);
   event Voted(string policyID, uint256 groupID, uint256 totalVotes);
@@ -53,15 +53,14 @@ contract PolicyVoterV1 is ReentrancyGuard, AccessControl {
   /**
 		@notice registers/unregisters an address with the system
 		@param newAddress - user's address
-        @param isRegistered - set to true if it is
-        @param groupID - the pilot ID, set to 0 for no pilot
+    @param isRegistered - set to true if it is
+    @param groupID - the pilot ID, set to 0 for no pilot
 	 */
   function registerAddress(
     address newAddress,
     bool isRegistered,
     uint256 groupID
   ) external onlyRole(ADDRESS_REGISTER_ROLE) {
-    registered[newAddress] = isRegistered;
     registered[newAddress] = isRegistered;
     groupForAddress[newAddress] = groupID;
   }
@@ -116,7 +115,7 @@ contract PolicyVoterV1 is ReentrancyGuard, AccessControl {
     require(policies[policyID].createdAt != 0, "policy not found");
 
     require(
-      policies[policyID].groupID != groupForAddress[msg.sender],
+      policies[policyID].groupID == groupForAddress[msg.sender],
       "you can only vote policies in your group"
     );
 
@@ -142,7 +141,7 @@ contract PolicyVoterV1 is ReentrancyGuard, AccessControl {
     require(!isPolicyBlacklisted[policyID], "policy is blacklisted");
 
     require(
-      policies[policyID].groupID != groupForAddress[msg.sender],
+      policies[policyID].groupID == groupForAddress[msg.sender],
       "you can only unvote policies in your group"
     );
 

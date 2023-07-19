@@ -46,7 +46,7 @@ describe("PolicyVoter Tests", function () {
     await expect(
       pv.createNewPolicy(
         "a1b2c3",
-        2,
+        1,
         "b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
       )
     ).to.emit(pv, "NewPolicy");
@@ -69,16 +69,18 @@ describe("PolicyVoter Tests", function () {
     await expect(
       pv.createNewPolicy(
         "a1b2c3",
+        1,
         "b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
       )
     ).to.emit(pv, "NewPolicy");
-    await expect(pv.vote("a1b2c3")).to.emit(pv, "Voted");
+    await expect(pv.connect(acc1).vote("a1b2c3")).to.emit(pv, "Voted");
   });
 
   it("simple vote on two policies", async function () {
     await expect(
       pv.createNewPolicy(
         "a1b2c3",
+        1,
         "b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
       )
     ).to.emit(pv, "NewPolicy");
@@ -86,6 +88,7 @@ describe("PolicyVoter Tests", function () {
     await expect(
       pv.createNewPolicy(
         "a1b2c4",
+        1,
         "e94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
       )
     ).to.emit(pv, "NewPolicy");
@@ -99,6 +102,7 @@ describe("PolicyVoter Tests", function () {
     await expect(
       pv.createNewPolicy(
         "a1b2c3",
+        1,
         "b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
       )
     ).to.emit(pv, "NewPolicy");
@@ -127,6 +131,7 @@ describe("PolicyVoter Tests", function () {
     await expect(
       pv.createNewPolicy(
         "a1b2c3",
+        1,
         "b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
       )
     ).to.emit(pv, "NewPolicy");
@@ -143,6 +148,7 @@ describe("PolicyVoter Tests", function () {
     await expect(
       pv.createNewPolicy(
         "a1b2c3",
+        1,
         "b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
       )
     ).to.emit(pv, "NewPolicy");
