@@ -51,11 +51,11 @@ contract PolicyVoterV1 is ReentrancyGuard, AccessControl {
   }
 
   /**
-		@notice registers/unregisters an address with the system
-		@param newAddress - user's address
-    @param isRegistered - set to true if it is
-    @param groupID - the pilot ID, set to 0 for no pilot
-	 */
+  @notice registers/unregisters an address with the system
+  @param newAddress - user's address
+  @param isRegistered - set to true if it is
+  @param groupID - the pilot ID, set to 0 for no pilot
+  */
   function registerAddress(
     address newAddress,
     bool isRegistered,
@@ -66,9 +66,9 @@ contract PolicyVoterV1 is ReentrancyGuard, AccessControl {
   }
 
   /**
-		@notice registers/unregisters an address with the system
-		@param newMinInterval - new interval in seconds
-	 */
+  @notice registers/unregisters an address with the system
+  @param newMinInterval - new interval in seconds
+  */
   function setMinIntervalBetweenVotes(uint256 newMinInterval)
     external
     onlyRole(DEFAULT_ADMIN_ROLE)
@@ -77,11 +77,11 @@ contract PolicyVoterV1 is ReentrancyGuard, AccessControl {
   }
 
   /**
-		@notice creates a new policy
-		@param policyID - the policy ID from the database
-        @param gID - the group ID
-		@param bodyHash - the hash of this policy body
-	 */
+  @notice creates a new policy
+  @param policyID - the policy ID from the database
+  @param gID - the group ID
+  @param bodyHash - the hash of this policy body
+ */
   function createNewPolicy(
     string memory policyID,
     uint256 gID,
@@ -101,9 +101,9 @@ contract PolicyVoterV1 is ReentrancyGuard, AccessControl {
   }
 
   /**
-		@notice votes on a policy
-		@param policyID - the policy ID from the database
-	 */
+  @notice votes on a policy
+  @param policyID - the policy ID from the database
+  */
   function vote(string memory policyID) external nonReentrant {
     require(tx.origin == msg.sender, "no contracts allowed");
     require(
@@ -133,9 +133,9 @@ contract PolicyVoterV1 is ReentrancyGuard, AccessControl {
   }
 
   /**
-		@notice removes a vote from a policy
-		@param policyID - the policy ID from the database
-	 */
+   @notice removes a vote from a policy
+   @param policyID - the policy ID from the database
+  */
   function unVote(string memory policyID) external nonReentrant {
     require(tx.origin == msg.sender, "no contracts allowed");
     require(!isPolicyBlacklisted[policyID], "policy is blacklisted");
@@ -157,8 +157,8 @@ contract PolicyVoterV1 is ReentrancyGuard, AccessControl {
   }
 
   /**
-		@notice adds/removes a policy from blacklist
-	 */
+  @notice adds/removes a policy from blacklist
+  */
   function setPolicyBlacklist(
     string memory policyID,
     bool blacklisted,
