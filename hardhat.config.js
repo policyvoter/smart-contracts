@@ -9,6 +9,7 @@ module.exports = {
   solidity: {
     version: "0.8.19",
     settings: {
+      evmVersion: "london", // required for Besu
       optimizer: {
         enabled: true,
         runs: 200,
@@ -31,9 +32,11 @@ module.exports = {
     },
     policy_voter: {
       url: process.env.POLICY_VOTER_RPC,
-      network_id: 4444,
-      gas: 2500000,
-      gasPrice: 10000000000, //1 gwei
+      network_id: 1530,
+      // gas: 2500000,
+      // gasPrice: 10000000000, //1 gwei
+      gasPrice: 0,
+      gas: 5000000,
       timeout: 35000,
       accounts: [process.env.PRIVATE_KEY],
     },

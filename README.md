@@ -2,7 +2,7 @@
 
 Production: 0xA4332d4C349847488b805A49C0f9113F24ed1267
 
-Dev: 0xf9199A668BE1eF8B024daf3473CaC8B565d353b2 (same contract)
+Staging: 0xCB840412ff7F0f9014D91C5Fd92daDB4A6753638 (demo)
 
 ## Instructions to verify authenticity
 
